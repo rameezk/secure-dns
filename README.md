@@ -4,7 +4,7 @@
 
 ## Features
 - [x] DNS over HTTPS
-- [ ] Fallback over UDP
+- [x] Fallback over UDP
 - [ ] Fallback over TCP
 - [ ] Systemd Daemon
 
