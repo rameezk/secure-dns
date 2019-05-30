@@ -1,0 +1,17 @@
+[Unit]
+Description = secure-dns daemon
+
+[Service]
+ExecStart=/usr/local/bin/secure-dns -listen_addr "127.0.0.1:53" -failover_domains "proxy.muc,bmwgroup.net" -failover_upstream 172.16.73.73:53
+
+Type = simple
+Restart = always
+
+# The user can be created with no permissions using:
+#
+# sudo useradd -U secdns -M -d /nonexistent -s /bin/false
+User = secdns
+Group secdns
+
+[Install]
+WantedBy = multi-user.target

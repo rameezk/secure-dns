@@ -1,0 +1,9 @@
+# Sockets for secure-dns
+#
+# This lets dnss run unprivileged.
+
+[Socket]
+ListenDatagram=53
+
+[Install]
+WantedBy=sockets.target
