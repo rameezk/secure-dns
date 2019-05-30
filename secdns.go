@@ -51,7 +51,3 @@ var Usage = func() {
 
 	flag.PrintDefaults()
 }
-
-// flag.Usage = func() {
-// 	fmt.Fprintf(os.Stderr, "Usage: \n")
-// }
