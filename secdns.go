@@ -26,7 +26,6 @@ func main() {
 	flag.Parse()
 
 	log.Printf("Initialising dns server...")
-	fmt.Println("Hi")
 
 	var wg sync.WaitGroup
 
