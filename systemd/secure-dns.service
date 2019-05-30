@@ -2,9 +2,11 @@
 Description = secure-dns daemon
 
 [Service]
-ExecStart=/usr/local/bin/secure-dns -listen_addr "127.0.0.1:53" -failover_domains "proxy.muc,bmwgroup.net" -failover_upstream 172.16.73.73:53
+EnvironmentFile=/etc/secure-dns.conf
+ExecStart=/usr/local/bin/secure-dns -listen_addr $LISTEN_ADDR -failover_domains $FAILOVER_DOMAINS -failover_upstream $FAILOVER_UPSTREAM
 Type = simple
 Restart = always
+RestartSec=5s
 
 CapabilityBoundingSet = CAP_NET_BIND_SERVICE
 ProtectSystem=full
