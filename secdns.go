@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/url"
 	"os"
+	"strings"
 	"sync"
 
 	"github.com/rameezk/secure-dns/internal/dnsserver"
@@ -17,6 +18,8 @@ var (
 	httpsUpstream = flag.String("https_upstream",
 		"https://dns.google.com/resolve",
 		"URL of upstream DNS-to-HTTP server")
+	failoverDomains  = flag.String("failover_domains", "", "domains to bypass dns-over-https and use conventional UDP (comma seperated)")
+	failoverUpstream = flag.String("failover_upstream", "", "upstream DNS server to use for querying domains in the failover_domains list")
 )
 
 func main() {
@@ -35,6 +38,12 @@ func main() {
 	resolver = httpsresolver.New(upstream)
 
 	server := dnsserver.New(*dnsListenAddr, resolver)
+
+	failoverDomainsList := strings.Split(*failoverDomains, ",")
+	if (len(failoverDomainsList) > 0) && (*failoverUpstream != "") {
+		log.Printf("Will bypass DNS-over-HTTPS for the following domains: %v", failoverDomainsList)
+		server.SetFailover(*failoverUpstream, failoverDomainsList)
+	}
 
 	wg.Add(1)
 	go func() {

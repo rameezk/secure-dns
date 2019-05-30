@@ -18,7 +18,6 @@ import (
 type httpsResolver struct {
 	Upstream *url.URL
 	client   *http.Client
-	mode     string
 }
 
 // New creates a new HTTPS resolver
@@ -43,9 +42,6 @@ func (resolver *httpsResolver) Init() error {
 	// Load certs here
 
 	return nil
-}
-
-func (resolver *httpsResolver) Maintain() {
 }
 
 func (resolver *httpsResolver) Query(request *dns.Msg) (*dns.Msg, error) {
