@@ -4,26 +4,35 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net/url"
 	"os"
 	"sync"
 
 	"github.com/rameezk/secure-dns/internal/dnsserver"
-	// "github.com/rameezk/secure-dns/internal/httpresolver"
+	"github.com/rameezk/secure-dns/internal/httpsresolver"
 )
 
 var (
 	dnsListenAddr = flag.String("listen_addr", ":53", "address to listen on")
+	httpsUpstream = flag.String("https_upstream",
+		"https://dns.google.com/resolve",
+		"URL of upstream DNS-to-HTTP server")
 )
 
 func main() {
 	flag.Parse()
 
 	log.Printf("Initialising dns server...")
+	fmt.Println("Hi")
 
 	var wg sync.WaitGroup
 
+	upstream, err := url.Parse(*httpsUpstream)
+	if err != nil {
+		log.Fatalf("Error connecting to upstream HTTPS server, did you specify the correct address? %v", err)
+	}
 	var resolver dnsserver.Resolver
-	// resolver = httpresolver.New(upstream)
+	resolver = httpsresolver.New(upstream)
 
 	server := dnsserver.New(*dnsListenAddr, resolver)
 
