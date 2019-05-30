@@ -5,8 +5,7 @@
 ## Features
 - [x] DNS over HTTPS
 - [x] Fallback over UDP
-- [ ] Fallback over TCP
-- [ ] Systemd Daemon
+- [x] Systemd Daemon
 
 ## Installation
 
@@ -32,5 +31,10 @@ NOTE If you're using the default listening address and port (e.g. 127.0.0.1:53),
 sudo secure-dns <args>
 ```
 
-### systemd
-Coming Soon (TM)
+### Daemon (via systemd)
+The systemd daemon can be installed by running:
+```bash
+./install-systemd-service.sh
+```
+
+The configuration file can be found at `/etc/secure-dns.conf`
