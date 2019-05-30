@@ -19,17 +19,17 @@ go get github.com/rameezk/secure-dns
 ### Classic Mode (AKA running from cli)
 If your `$GOPATH` is set correctly, you can simply invoke with:
 ```bash
-secdns <args>
+secure-dns <args>
 ```
 
 For a full list of configuration options, use:
 ```bash
-secdns --help
+secure-dns --help
 ```
 
 NOTE If you're using the default listening address and port (e.g. 127.0.0.1:53), you'll need to run as root
 ```bash
-sudo secdns <args>
+sudo secure-dns <args>
 ```
 
 ### systemd
