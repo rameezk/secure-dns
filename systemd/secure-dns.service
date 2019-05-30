@@ -1,11 +1,8 @@
 [Unit]
 Description = secure-dns daemon
 
-Requires=secure-dns.socket
-
 [Service]
 ExecStart=/usr/local/bin/secure-dns -listen_addr "127.0.0.1:53" -failover_domains "proxy.muc,bmwgroup.net" -failover_upstream 172.16.73.73:53
-
 Type = simple
 Restart = always
 
@@ -13,5 +10,4 @@ CapabilityBoundingSet = CAP_NET_BIND_SERVICE
 ProtectSystem=full
 
 [Install]
-Also=secure-dns.socket
 WantedBy = multi-user.target
